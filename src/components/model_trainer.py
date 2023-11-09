@@ -19,11 +19,9 @@ from src.logger import logging
 
 from src.utils import save_object,evaluate_models
 
-
 @dataclass
 class ModelTrainerConfig:
     trained_model_file_path=os.path.join("artifacts","model.pkl")
-
 
 class ModelTrainer:
     def __init__(self):
@@ -86,7 +84,6 @@ class ModelTrainer:
                 
             }
 
-
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
                                              models=models,param=params)
             
@@ -100,7 +97,6 @@ class ModelTrainer:
             ]
             best_model = models[best_model_name]
 
-            
             if best_model_score<0.6:
                 raise CustomException("No best model found")
             logging.info(f"Best found model on both training and testing dataset")
@@ -114,9 +110,7 @@ class ModelTrainer:
 
             r2_square = r2_score(y_test, predicted)
             return r2_square
-        
-             
+            
+
         except Exception as e:
             raise CustomException(e,sys)
-
-
